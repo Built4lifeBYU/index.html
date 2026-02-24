@@ -8,18 +8,26 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 
   <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      margin: 40px; 
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #ffffff;
     }
 
-    h2 { color: #002E5D; }
+    h2 {
+      color: #002E5D;
+      margin-bottom: 20px;
+    }
 
-    #calendar { max-width: 1000px; }
+    #calendar {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-    .fc-toolbar-title { 
-      color: #002E5D; 
-      font-weight: bold; 
+    .fc-toolbar-title {
+      color: #002E5D;
+      font-weight: bold;
     }
 
     .fc-button-primary {
@@ -28,8 +36,8 @@
       color: #fff !important;
     }
 
-    .fc-button-primary:hover { 
-      background-color: #001f42 !important; 
+    .fc-button-primary:hover {
+      background-color: #001f42 !important;
     }
 
     .fc-event {
@@ -37,12 +45,11 @@
       border-color: #002E5D !important;
       color: #fff !important;
       border-radius: 4px !important;
-      font-size: 0.78em !important;
+      font-size: 0.8em !important;
       white-space: normal !important;
       cursor: pointer;
     }
 
-    /* Background highlight events */
     .fc-bg-event {
       background-color: #5a80b0 !important;
       opacity: 0.35 !important;
@@ -62,14 +69,14 @@
       pointer-events: none;
     }
 
-    #event-tooltip b { 
-      display: block; 
-      margin-bottom: 4px; 
+    #event-tooltip b {
+      display: block;
+      margin-bottom: 4px;
     }
 
-    #event-tooltip span { 
-      font-size: 12px; 
-      opacity: 0.85; 
+    #event-tooltip span {
+      font-size: 12px;
+      opacity: 0.85;
     }
   </style>
 </head>
@@ -93,45 +100,26 @@
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        height: 700,
-        dayMaxEvents: false,
+        height: "auto",
+        expandRows: true,
+        dayMaxEvents: true,
+
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
           right: 'dayGridMonth,listMonth'
         },
 
-        events: [
-          { title: "Pacific Islander Student-Athlete Dinner (6pm)", start: "2026-02-19T18:00:00" },
-          { title: "Stories of Life Event", start: "2026-02-26" },
-          { title: "Career Trek to Vivint and Doterra", start: "2026-02-27" },
-
-          { title: "Athletic Trainer Month", start: "2026-03-01", end: "2026-04-01", display: "background" },
-          { title: "Belonging Begins w/ Us Campaign", start: "2026-03-01", end: "2026-04-01", display: "background" },
-
-          { title: "NCAA Common Ground", start: "2026-03-02", end: "2026-03-06" },
-          { title: "More Than an Athlete Night", start: "2026-03-02" },
-          { title: "Built4Life Workshop – Career Exploration (11am SAB)", start: "2026-03-05T11:00:00" },
-          { title: "Built4Life Workshop – Career Exploration (11am SAB)", start: "2026-03-19T11:00:00" },
-
-          { title: "Sports Hero Day", start: "2026-03-26" },
-          { title: "Y-Awards / Closing Social", start: "2026-03-30" },
-
-          { title: "Arab-American Heritage Month", start: "2026-04-01", end: "2026-05-01", display: "background" },
-          { title: "Inclusive Sports Foundation", start: "2026-04-03" },
-          { title: "Built2Serve / Service Trip", start: "2026-04-19", end: "2026-04-23" },
-          { title: "Student-Athlete Graduation Banquet", start: "2026-04-22" },
-
-          { title: "Black Student-Athlete Summit", start: "2026-05-20", end: "2026-05-24" }
-        ],
+        // 🔥 THIS IS THE IMPORTANT PART
+        events: 'events.json',
 
         eventMouseEnter: function (info) {
           const start = info.event.start;
           const dateStr = start
-            ? start.toLocaleDateString('en-US', { 
-                weekday: 'short', 
-                month: 'long', 
-                day: 'numeric' 
+            ? start.toLocaleDateString('en-US', {
+                weekday: 'short',
+                month: 'long',
+                day: 'numeric'
               })
             : '';
 
